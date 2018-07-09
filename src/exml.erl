@@ -55,19 +55,19 @@ xml_size({Key, Value}) ->
 
 -spec to_list(element() | [exml_stream:element()]) -> string().
 to_list(Element) ->
-    binary_to_list(to_binary(Element)).
+    unicode:characters_to_list(to_binary(Element), utf8).
 
 -spec to_binary(element() | [exml_stream:element()]) -> binary().
 to_binary(Element) ->
-    iolist_to_binary(to_iolist(Element, not_pretty)).
+    unicode:characters_to_binary(to_iolist(Element, not_pretty)).
 
 -spec to_iolist(element() | [exml_stream:element()]) -> iodata().
 to_iolist(Element) ->
-    iolist_to_binary(to_iolist(Element, not_pretty)).
+    unicode:characters_to_binary(to_iolist(Element, not_pretty)).
 
 -spec to_pretty_iolist(element() | [exml_stream:element()]) -> iodata().
 to_pretty_iolist(Element) ->
-    iolist_to_binary(to_iolist(Element, pretty)).
+    unicode:characters_to_binary(to_iolist(Element, pretty)).
 
 -spec parse(binary() | [binary()]) -> {ok, exml:element()} | {error, any()}.
 parse(XML) ->
